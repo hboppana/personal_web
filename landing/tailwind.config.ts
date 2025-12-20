@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-space-grotesk)'],
-        serif: ['var(--font-playfair)'],
+        sans: ['var(--font-inter)'],
+        serif: ['var(--font-outfit)'],
         mono: ['var(--font-jetbrains-mono)'],
       },
       animation: {
