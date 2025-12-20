@@ -1,41 +1,26 @@
 import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import Skills from './components/Skills';
+import Experience from './components/Experience';
+import Projects from './components/Projects';
 
 export default function Home() {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black text-white relative overflow-hidden">
+      {/* Ambient background effects */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+      </div>
+
       <Navbar />
       
-      {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-4xl">
-          <h1 className="text-6xl font-bold mb-4">Your Name</h1>
-          <p className="text-2xl text-gray-400">Software Engineer</p>
-        </div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-6xl w-full">
-          <h2 className="text-4xl font-bold mb-8">Skills</h2>
-          <p className="text-gray-400">Skills content will go here</p>
-        </div>
-      </section>
-
-      {/* Experience Section */}
-      <section id="experience" className="min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-6xl w-full">
-          <h2 className="text-4xl font-bold mb-8">Experience</h2>
-          <p className="text-gray-400">Experience content will go here</p>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-6xl w-full">
-          <h2 className="text-4xl font-bold mb-8">Projects</h2>
-          <p className="text-gray-400">Projects content will go here</p>
-        </div>
-      </section>
+      <div className="relative z-10">
+        <Hero />
+        <Skills />
+        <Experience />
+        <Projects />
+      </div>
     </div>
   );
 }
