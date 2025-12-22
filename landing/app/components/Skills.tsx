@@ -1,89 +1,95 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useMemo, useRef, useState } from 'react';
+import { createElement, useMemo, useRef, useState } from 'react';
+import type { IconType } from 'react-icons';
+import { DiMsqlServer } from 'react-icons/di';
+import { FaJava } from 'react-icons/fa6';
+import {
+  SiAmazonwebservices,
+  SiCplusplus,
+  SiDocker,
+  SiGit,
+  SiGooglecloud,
+  SiJavascript,
+  SiJupyter,
+  SiKeras,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiOpencv,
+  SiPandas,
+  SiPostgresql,
+  SiPython,
+  SiPytorch,
+  SiReact,
+  SiTailwindcss,
+  SiTensorflow,
+  SiTypescript,
+} from 'react-icons/si';
+import { VscAzureDevops } from 'react-icons/vsc';
 
 type SkillGroup = 'Frontend' | 'Backend' | 'MLOps' | 'Tools' | 'Languages';
 
 const skillGroups: SkillGroup[] = ['Frontend', 'Backend', 'MLOps', 'Tools', 'Languages'];
 
-const skills = [
-  { name: 'React', category: 'Frontend', group: 'Frontend' as const, icon: '⚛️' },
-  { name: 'Next.js', category: 'Framework', group: 'Frontend' as const, icon: '▲' },
-  { name: 'Tailwind', category: 'CSS', group: 'Frontend' as const, icon: '💨' },
+type SkillIcon = IconType | string;
 
-  { name: 'Node.js', category: 'Backend', group: 'Backend' as const, icon: '🟢' },
-  { name: 'PostgreSQL', category: 'Database', group: 'Backend' as const, icon: '🐘' },
-
-  { name: 'PyTorch', category: 'DevOps', group: 'MLOps' as const, icon: '🔥' },
-  { name: 'TensorFlow', category: 'DevOps', group: 'MLOps' as const, icon: '🧠' },
-  { name: 'Keras', category: 'DevOps', group: 'MLOps' as const, icon: '🧬' },
-  { name: 'OpenCV', category: 'DevOps', group: 'MLOps' as const, icon: '👁️' },
-  { name: 'Pandas', category: 'DevOps', group: 'MLOps' as const, icon: '🐼' },
-
-  { name: 'Docker', category: 'DevOps', group: 'Tools' as const, icon: '🐳' },
-  { name: 'AWS', category: 'Cloud', group: 'Tools' as const, icon: '☁️' },
-  { name: 'Azure', category: 'Cloud', group: 'Tools' as const, icon: '🟦' },
-  { name: 'Google Cloud', category: 'Cloud', group: 'Tools' as const, icon: '🌥️' },
-  { name: 'Git', category: 'DevOps', group: 'Tools' as const, icon: '🌿' },
-  { name: 'Jupyter Notebooks', category: 'DevOps', group: 'Tools' as const, icon: '📓' },
-
-  { name: 'Python', category: 'Language', group: 'Languages' as const, icon: '🐍' },
-  { name: 'C++', category: 'Language', group: 'Languages' as const, icon: '➕' },
-  { name: 'Java', category: 'Language', group: 'Languages' as const, icon: '☕' },
-  { name: 'SQL', category: 'Language', group: 'Languages' as const, icon: '🗄️' },
-  { name: 'TypeScript', category: 'Language', group: 'Languages' as const, icon: '📘' },
-  { name: 'JavaScript', category: 'Language', group: 'Languages' as const, icon: '🟨' },
-];
-
-type SkillCategory = (typeof skills)[number]['category'];
-
-const categoryAccent: Record<SkillCategory, { dot: string; glow: string; border: string }> = {
-  Frontend: {
-    dot: 'bg-purple-400',
-    glow: 'from-purple-500/25 via-pink-500/10 to-blue-500/20',
-    border: 'group-hover:border-purple-400/50',
-  },
-  Language: {
-    dot: 'bg-blue-400',
-    glow: 'from-blue-500/25 via-cyan-500/10 to-purple-500/15',
-    border: 'group-hover:border-blue-400/45',
-  },
-  Backend: {
-    dot: 'bg-emerald-400',
-    glow: 'from-emerald-500/20 via-cyan-500/10 to-blue-500/15',
-    border: 'group-hover:border-emerald-400/45',
-  },
-  Framework: {
-    dot: 'bg-pink-400',
-    glow: 'from-pink-500/20 via-purple-500/10 to-blue-500/15',
-    border: 'group-hover:border-pink-400/45',
-  },
-  CSS: {
-    dot: 'bg-cyan-400',
-    glow: 'from-cyan-500/25 via-blue-500/10 to-purple-500/15',
-    border: 'group-hover:border-cyan-400/45',
-  },
-  Database: {
-    dot: 'bg-violet-400',
-    glow: 'from-violet-500/20 via-purple-500/10 to-blue-500/10',
-    border: 'group-hover:border-violet-400/45',
-  },
-  DevOps: {
-    dot: 'bg-amber-300',
-    glow: 'from-amber-400/20 via-purple-500/10 to-blue-500/10',
-    border: 'group-hover:border-amber-300/45',
-  },
-  Cloud: {
-    dot: 'bg-sky-400',
-    glow: 'from-sky-500/20 via-cyan-500/10 to-purple-500/10',
-    border: 'group-hover:border-sky-400/45',
-  },
+type Skill = {
+  name: string;
+  group: SkillGroup;
+  icon: SkillIcon;
 };
+
+function SkillIcon({ icon, className }: { icon: SkillIcon; className?: string }) {
+  if (typeof icon === 'string') {
+    return (
+      <span aria-hidden="true" className={className}>
+        {icon}
+      </span>
+    );
+  }
+
+  return createElement(icon, {
+    'aria-hidden': true,
+    focusable: false,
+    className,
+  });
+}
+
+const skills: Skill[] = [
+  { name: 'React', group: 'Frontend' as const, icon: SiReact },
+  { name: 'Next.js', group: 'Frontend' as const, icon: SiNextdotjs },
+  { name: 'Tailwind', group: 'Frontend' as const, icon: SiTailwindcss },
+
+  { name: 'Node.js', group: 'Backend' as const, icon: SiNodedotjs },
+  { name: 'PostgreSQL', group: 'Backend' as const, icon: SiPostgresql },
+  { name: 'MongoDB', group: 'Backend' as const, icon: SiMongodb },
+
+  { name: 'PyTorch', group: 'MLOps' as const, icon: SiPytorch },
+  { name: 'TensorFlow', group: 'MLOps' as const, icon: SiTensorflow },
+  { name: 'Keras', group: 'MLOps' as const, icon: SiKeras },
+  { name: 'OpenCV', group: 'MLOps' as const, icon: SiOpencv },
+  { name: 'Pandas', group: 'MLOps' as const, icon: SiPandas },
+
+  { name: 'Docker', group: 'Tools' as const, icon: SiDocker },
+  { name: 'AWS', group: 'Tools' as const, icon: SiAmazonwebservices },
+  { name: 'Azure', group: 'Tools' as const, icon: VscAzureDevops },
+  { name: 'Google Cloud', group: 'Tools' as const, icon: SiGooglecloud },
+  { name: 'Git', group: 'Tools' as const, icon: SiGit },
+  { name: 'Jupyter Notebooks', group: 'Tools' as const, icon: SiJupyter },
+
+  { name: 'Python', group: 'Languages' as const, icon: SiPython },
+  { name: 'C++', group: 'Languages' as const, icon: SiCplusplus },
+  { name: 'Java', group: 'Languages' as const, icon: FaJava },
+  { name: 'SQL', group: 'Languages' as const, icon: DiMsqlServer },
+  { name: 'TypeScript', group: 'Languages' as const, icon: SiTypescript },
+  { name: 'JavaScript', group: 'Languages' as const, icon: SiJavascript },
+];
 
 export default function Skills() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-120px' });
+  const isInView = useInView(ref, { once: false, margin: '-120px' });
   const [activeGroup, setActiveGroup] = useState<SkillGroup>('Frontend');
 
   const easeOut: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -114,6 +120,45 @@ export default function Skills() {
     >
       {/* Hero-consistent ambient blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* On-enter sweep */}
+        <motion.div
+          aria-hidden="true"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="absolute inset-0"
+        >
+          <motion.div
+            aria-hidden="true"
+            initial={{ x: -760, opacity: 0 }}
+            animate={
+              isInView
+                ? {
+                    x: 760,
+                    opacity: [0, 0.55, 0],
+                  }
+                : { x: -760, opacity: 0 }
+            }
+            transition={{ duration: 1.05, ease: easeOut }}
+            className="absolute -top-24 left-1/2 h-[34rem] w-[34rem] -translate-x-1/2 rotate-[18deg] bg-gradient-to-r from-purple-500/0 via-purple-400/55 to-cyan-400/0 blur-2xl mix-blend-screen"
+          />
+
+          <motion.div
+            aria-hidden="true"
+            initial={{ scale: 0.96, opacity: 0 }}
+            animate={
+              isInView
+                ? {
+                    scale: [0.95, 1.06, 1],
+                    opacity: [0, 0.35, 0],
+                  }
+                : { scale: 0.96, opacity: 0 }
+            }
+            transition={{ duration: 0.85, ease: easeOut, delay: 0.04 }}
+            className="absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-purple-400/0 via-purple-300/18 to-blue-400/0 blur-2xl mix-blend-screen"
+          />
+        </motion.div>
+
         <div className="absolute -top-16 left-[-12rem] h-[28rem] w-[28rem] rounded-full bg-purple-500/25 blur-3xl animate-float" />
         <div
           className="absolute top-24 right-[-14rem] h-[30rem] w-[30rem] rounded-full bg-blue-500/20 blur-3xl animate-float"
@@ -138,13 +183,27 @@ export default function Skills() {
           {/* Left: header */}
           <motion.div variants={item} className="lg:pt-8">
 
-            <h2 className="mt-6 text-5xl sm:text-6xl font-sans font-semibold tracking-tight text-slate-100">
-              My{' '}
-              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-                Skills
-              </span>
-              
-            </h2>
+            <div className="mt-6 flex flex-col gap-2 sm:gap-3">
+              <h2 className="text-5xl sm:text-6xl font-sans font-semibold tracking-tight text-slate-100">
+                My{' '}
+                <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+                  Skills
+                </span>
+              </h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 10, filter: 'blur(6px)', clipPath: 'inset(0 100% 0 0)' }}
+                animate={
+                  isInView
+                    ? { opacity: 1, y: 0, filter: 'blur(0px)', clipPath: 'inset(0 0% 0 0)' }
+                    : { opacity: 0, y: 10, filter: 'blur(6px)', clipPath: 'inset(0 100% 0 0)' }
+                }
+                transition={{ duration: 0.7, ease: easeOut, delay: 0.18 }}
+                className="text-base sm:text-lg font-medium text-white/70 tracking-tight"
+              >
+                Just a few things I&apos;ve worked with...
+              </motion.p>
+            </div>
 
           </motion.div>
 
@@ -201,7 +260,7 @@ export default function Skills() {
                   >
                     <div className="relative z-10 flex items-center gap-3">
                       <div className="grid h-11 w-11 place-items-center rounded-2xl bg-black/10 text-2xl">
-                        <span>{skill.icon}</span>
+                        <SkillIcon icon={skill.icon} className="h-6 w-6 text-white/85" />
                       </div>
 
                       <div className="relative inline-block">
