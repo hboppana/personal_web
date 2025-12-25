@@ -48,3 +48,13 @@ html {
 .cursor-blink {
   animation: cursor-blink 1s step-end infinite;
 }
+
+.animated-gradient-text {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease-in-out infinite;
+  will-change: background-position;
+}
+
+.animated-gradient-text:hover {
+  animation-duration: 3s;
+}
