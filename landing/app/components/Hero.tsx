@@ -5,7 +5,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import ResumePreview from './ResumePreview';
 
 export default function Hero() {
-  const resumePdfHref = '/Hemanshu_Boppana_Resume.pdf';
+  // Use the `/resume` app route for both preview and download so any
+  // uploaded filename (for example: Hemanshu_Boppana_resume (10).pdf)
+  // in the `public/` directory will be discovered by the route.
+  const resumePdfHref = '/resume';
   const resumeDownloadHref = '/resume';
 
   const [showScrollCue, setShowScrollCue] = useState(true);
