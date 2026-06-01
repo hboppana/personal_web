@@ -26,7 +26,7 @@ const experience = [
     logo: "/diploy.png",
     fallback: "DP",
     bullets: [
-      "Building an AI-powered resume builder and data pipelines for labor-market analytics.",
+      "Shipped enterprise features at a startup building AI tools for students in career and technical education (CTE).",
     ],
   },
   {
@@ -36,7 +36,7 @@ const experience = [
     logo: "/uf_ic3.png",
     fallback: "iH",
     bullets: [
-      "Building and evaluating ML models for heart failure and delirium prediction.",
+      "Shaped evaluation metrics for ML models for heart failure and delirium prediction.",
     ],
   },
   {
@@ -59,18 +59,30 @@ const projects = [
     ],
     links: [
       { label: "code", href: "https://github.com/hboppana/vectordbproject" },
-      { label: "blog", href: "/blog/vectordb" },
     ],
   },
   {
     name: "Explainable",
     bullets: [
-      "An AI tool that explains complex academic topics over web and phone.",
+      <>
+        An AI tool that explains complex academic topics over web and phone.{" "}
+        <span className="font-bold">Winning project at SwampHacks XI.</span>
+      </>,
     ],
     links: [
       { label: "live", href: "https://explainable-mu.vercel.app/" },
-      { label: "code", href: "https://github.com/eren-s-chang/explainable" },
+      { label: "code", href: "https://github.com/hboppana/explainable" },
     ],
+  },
+  {
+    name: "Calendai",
+    bullets: [
+      <>
+        A full-stack web app that helps students with ADHD manage tasks.{" "}
+        <span className="font-bold">Winner at SASEHacks 2024.</span>
+      </>,
+    ],
+    links: [{ label: "code (taken down)" }],
   },
   {
     name: "Personal Tutoring Platform",
@@ -84,10 +96,22 @@ const projects = [
   },
 ];
 
+const sportsLogos = [
+  { src: "/Chicago-Bears-Logo.png", alt: "Chicago Bears" },
+  { src: "/Chicago_Cubs_logo.png", alt: "Chicago Cubs" },
+  { src: "/bulls_logo.png", alt: "Chicago Bulls" },
+  { src: "/Chicago_Blackhawks_logo.png", alt: "Chicago Blackhawks" },
+  { src: "/floridagators_logo.png", alt: "Florida Gators" },
+];
+
 const aboutMe = [
-  "Placeholder bullet — something about your interests.",
-  "Placeholder bullet — a hobby or what you're into.",
-  "Placeholder bullet — anything that makes you, you.",
+  { text: "Born in India, raised in the Chicagoland area." },
+  {
+    text: "Big sports fan. Fan of the Chicago teams, and of course Gator Athletics.",
+    logos: sportsLogos,
+  },
+  { text: "Geography buff. I can name every country in the world off the top of my head." },
+  { text: "Always staying active: weightlifting, recreational sports, hiking, you name it. " },
 ];
 
 const fullName = "Hemanshu Boppana";
@@ -133,19 +157,16 @@ export default function Home() {
             <a className="prose-link" href="#experience">experience</a>
             <span aria-hidden="true">·</span>
             <a className="prose-link" href="#projects">projects</a>
-            <span aria-hidden="true">·</span>
-            <a className="prose-link" href="/blog">blog</a>
           </nav>
         </div>
 
-        {/* Headshot. Drop your image at public/headshot.jpg to replace the placeholder. */}
-        <div
-          aria-label="Headshot placeholder"
-          className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-full border border-rule bg-[var(--rule)] text-base font-bold text-muted sm:h-28 sm:w-28 sm:text-lg"
-        >
-          {/* When you add public/headshot.jpg, replace the line below with:
-              <img src="/headshot.jpg" alt="Hemanshu Boppana" className="h-full w-full object-cover" /> */}
-          HB
+        {/* Headshot */}
+        <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border border-rule bg-[var(--rule)] sm:h-36 sm:w-36">
+          <img
+            src="/headshot.jpg"
+            alt="Hemanshu Boppana"
+            className="h-full w-full object-cover"
+          />
         </div>
       </header>
 
@@ -156,7 +177,7 @@ export default function Home() {
           <span className="uf-gradient">University of Florida </span> studying
           Computer Science with a minor in Statistics. I&apos;m an engineer with
           interests in AI, high-performance systems, and software development.
-          Take a look at some of my work!
+          Feel free to take a look at some of my work!
         </p>
         <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-base">
           <a
@@ -253,17 +274,23 @@ export default function Home() {
                   <div className="flex flex-wrap items-baseline gap-x-4">
                     <p className="text-lg font-bold">{p.name}</p>
                     <span className="flex gap-x-4 text-sm">
-                      {p.links.map((l) => (
-                        <a
-                          key={l.label}
-                          className="prose-link"
-                          href={l.href}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {l.label}
-                        </a>
-                      ))}
+                      {p.links.map((l) =>
+                        "href" in l ? (
+                          <a
+                            key={l.label}
+                            className="prose-link"
+                            href={l.href}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            {l.label}
+                          </a>
+                        ) : (
+                          <span key={l.label} className="text-muted">
+                            {l.label}
+                          </span>
+                        )
+                      )}
                     </span>
                   </div>
                   <ul className="custom-bullets mt-2 space-y-1.5 pl-6 text-base leading-relaxed">
@@ -278,12 +305,26 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Personal Deets */}
+      {/* About Me */}
       <section className="mt-12 scroll-mt-8">
-        <h2 className="section-label">Personal Deets</h2>
+        <h2 className="section-label">About Me</h2>
         <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed marker:text-muted">
-          {aboutMe.map((line, i) => (
-            <li key={i}>{line}</li>
+          {aboutMe.map((item, i) => (
+            <li key={i}>
+              {item.text}
+              {item.logos && (
+                <span className="ml-2 inline-flex flex-wrap items-center gap-2 align-middle">
+                  {item.logos.map((logo) => (
+                    <img
+                      key={logo.src}
+                      src={logo.src}
+                      alt={logo.alt}
+                      className="h-6 w-auto object-contain sm:h-7"
+                    />
+                  ))}
+                </span>
+              )}
+            </li>
           ))}
         </ul>
       </section>
