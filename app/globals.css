@@ -53,6 +53,66 @@ body {
   text-decoration-color: var(--foreground);
 }
 
+/* Animated monochrome indicator for the Projects stepper */
+@keyframes step-pulse {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes step-ring {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+.step-dot {
+  animation: step-pulse 2.4s ease-in-out infinite;
+}
+
+.step-ring {
+  animation: step-ring 2.4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .step-dot,
+  .step-ring {
+    animation: none;
+  }
+  .step-ring {
+    opacity: 0;
+  }
+}
+
+/* Custom indented bullet points (used in Experience / Projects) */
+.custom-bullets {
+  list-style: none;
+}
+
+.custom-bullets > li {
+  position: relative;
+}
+
+.custom-bullets > li::before {
+  content: "▹";
+  position: absolute;
+  left: -1.25rem;
+  color: var(--muted);
+  font-size: 0.85em;
+  line-height: inherit;
+}
+
 /* Small caps section labels */
 .section-label {
   font-family: var(--font-display);

@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 /* Placeholder posts. Each will eventually link to its own article page. */
 const posts = [
-  { title: "Placeholder post one", href: "#", date: "Coming soon" },
-  { title: "Placeholder post two", href: "#", date: "Coming soon" },
+  { title: "VectorDB", href: "/blog/vectordb", date: "Coming soon" },
+  { title: "Research Experiences", href: "/blog/research-experiences", date: "Coming soon" },
 ];
 
 export default function Blog() {

@@ -1,28 +1,85 @@
 import ThemeToggle from "./components/ThemeToggle";
+import Stepper from "./components/Stepper";
+import LogoBadge from "./components/LogoBadge";
 
 /* ------------------------------------------------------------------ *
  * Placeholder content. Swap these out for real copy section by section.
+ * Drop experience logos in /public/logos (filenames below).
  * ------------------------------------------------------------------ */
 
 const experience = [
-  { org: "Company / Lab", role: "Role title", period: "Mon Year – Present" },
-  { org: "Company / Lab", role: "Role title", period: "Mon Year – Mon Year" },
-  { org: "Company / Lab", role: "Role title", period: "Mon Year – Mon Year" },
+  {
+    org: "Adaptive Learning & Optimization Lab @ University of Florida",
+    role: "Undergraduate Researcher",
+    period: "Present",
+    logo: "/uflorida.png",
+    fallback: "ALO",
+    bullets: [
+      "Researching differential privacy and AI fairness under Dr. My T. Thai.",
+    ],
+  },
+  {
+    org: "Diploy",
+    role: "Software Engineer Intern",
+    period: "Jan 2026 – Present",
+    logo: "/diploy.png",
+    fallback: "DP",
+    bullets: [
+      "Building an AI-powered resume builder and data pipelines for labor-market analytics.",
+    ],
+  },
+  {
+    org: "iHeal Lab @ University of Florida",
+    role: "Machine Learning Researcher",
+    period: "Mar 2025 – Present",
+    logo: "/uf_ic3.png",
+    fallback: "iH",
+    bullets: [
+      "Building and evaluating ML models for heart failure and delirium prediction.",
+    ],
+  },
+  {
+    org: "AIR Lab @ University of Florida",
+    role: "Research Engineer",
+    period: "Feb 2025 – Sep 2025",
+    logo: "/uflorida.png",
+    fallback: "AIR",
+    bullets: [
+      "Built data pipelines and ETL workflows for misinformation-detection research.",
+    ],
+  },
 ];
 
 const projects = [
   {
-    name: "Project one",
-    blurb: "One-line description of what it is.",
+    name: "VectorDB",
+    bullets: [
+      "A vector database built from scratch in C++ for fast semantic search.",
+    ],
     links: [
-      { label: "live", href: "#" },
-      { label: "code", href: "#" },
+      { label: "code", href: "https://github.com/hboppana/vectordbproject" },
+      { label: "blog", href: "/blog/vectordb" },
     ],
   },
   {
-    name: "Project two",
-    blurb: "One-line description of what it is.",
-    links: [{ label: "code", href: "#" }],
+    name: "Explainable",
+    bullets: [
+      "An AI tool that explains complex academic topics over web and phone.",
+    ],
+    links: [
+      { label: "live", href: "https://explainable-mu.vercel.app/" },
+      { label: "code", href: "https://github.com/eren-s-chang/explainable" },
+    ],
+  },
+  {
+    name: "Personal Tutoring Platform",
+    bullets: [
+      "A tutoring marketplace with payments, scheduling, and serverless infra.",
+    ],
+    links: [
+      { label: "live", href: "https://tutor-website-beta-six.vercel.app/" },
+      { label: "code", href: "https://github.com/hboppana/tutor-website" },
+    ],
   },
 ];
 
@@ -145,39 +202,75 @@ export default function Home() {
       {/* Experience */}
       <section id="experience" className="mt-12 scroll-mt-8">
         <h2 className="section-label">Experience</h2>
-        <ul className="mt-4 space-y-5">
-          {experience.map((item, i) => (
-            <li key={i}>
-              <p className="text-lg">
-                <span className="font-bold">{item.org}</span>
-                <span className="text-muted"> — {item.role}</span>
-              </p>
-              <p className="text-sm text-muted">{item.period}</p>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-5">
+          <Stepper
+            steps={experience.map((item) => ({
+              indicator: (
+                <LogoBadge
+                  src={item.logo}
+                  alt={`${item.org} logo`}
+                  fallback={item.fallback}
+                />
+              ),
+              content: (
+                <>
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4">
+                    <p className="text-lg font-bold">{item.role}</p>
+                    <p className="text-sm text-muted">{item.period}</p>
+                  </div>
+                  <p className="text-base text-muted">{item.org}</p>
+                  <ul className="custom-bullets mt-2 space-y-1.5 pl-6 text-base leading-relaxed">
+                    {item.bullets.map((b, j) => (
+                      <li key={j}>{b}</li>
+                    ))}
+                  </ul>
+                </>
+              ),
+            }))}
+          />
+        </div>
       </section>
 
       {/* Projects */}
       <section id="projects" className="mt-12 scroll-mt-8">
         <h2 className="section-label">Projects</h2>
-        <ul className="mt-4 space-y-5">
-          {projects.map((p, i) => (
-            <li key={i}>
-              <p className="text-lg">
-                <span className="font-bold">{p.name}</span>
-                <span className="text-muted"> — {p.blurb}</span>
-              </p>
-              <p className="mt-1 flex gap-x-4 text-sm">
-                {p.links.map((l) => (
-                  <a key={l.label} className="prose-link" href={l.href}>
-                    {l.label}
-                  </a>
-                ))}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-5">
+          <Stepper
+            steps={projects.map((p) => ({
+              indicator: (
+                <span className="relative grid size-10 shrink-0 place-items-center">
+                  <span className="step-ring absolute size-3 rounded-full bg-foreground/30" />
+                  <span className="step-dot size-2.5 rounded-full bg-foreground" />
+                </span>
+              ),
+              content: (
+                <>
+                  <div className="flex flex-wrap items-baseline gap-x-4">
+                    <p className="text-lg font-bold">{p.name}</p>
+                    <span className="flex gap-x-4 text-sm">
+                      {p.links.map((l) => (
+                        <a
+                          key={l.label}
+                          className="prose-link"
+                          href={l.href}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {l.label}
+                        </a>
+                      ))}
+                    </span>
+                  </div>
+                  <ul className="custom-bullets mt-2 space-y-1.5 pl-6 text-base leading-relaxed">
+                    {p.bullets.map((b, j) => (
+                      <li key={j}>{b}</li>
+                    ))}
+                  </ul>
+                </>
+              ),
+            }))}
+          />
+        </div>
       </section>
 
       {/* Personal Deets */}
