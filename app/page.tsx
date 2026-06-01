@@ -89,6 +89,8 @@ const aboutMe = [
   "Placeholder bullet — anything that makes you, you.",
 ];
 
+const fullName = "Hemanshu Boppana";
+
 export default function Home() {
   return (
     <main id="top" className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
@@ -97,11 +99,12 @@ export default function Home() {
         <div className="min-w-0">
           {/* Name (clickable -> back to top) with social logos to its right */}
           <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <h1 className="typewriter-shell text-xl font-bold tracking-tight sm:text-2xl">
-              <span className="typewriter-measure">Hemanshu Boppana</span>
-              <span aria-hidden="true" className="typewriter">
-                Hemanshu Boppana
-              </span>
+            <h1
+              aria-label={fullName}
+              className="typewriter-shell text-xl font-bold tracking-tight sm:text-2xl"
+            >
+              <span aria-hidden="true" className="typewriter-measure">{fullName}</span>
+              <span aria-hidden="true" className="typewriter">{fullName}</span>
             </h1>
             <a
               href="https://github.com/hboppana"
