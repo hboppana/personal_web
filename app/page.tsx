@@ -97,7 +97,7 @@ export default function Home() {
         <div className="min-w-0">
           {/* Name (clickable -> back to top) with social logos to its right */}
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold tracking-tight">
+            <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
               <span className="typewriter">Hemanshu Boppana</span>
             </h1>
             <a
@@ -136,7 +136,7 @@ export default function Home() {
         {/* Headshot. Drop your image at public/headshot.jpg to replace the placeholder. */}
         <div
           aria-label="Headshot placeholder"
-          className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded-full border border-rule bg-[var(--rule)] text-lg font-bold text-muted sm:h-28 sm:w-28"
+          className="grid h-16 w-16 shrink-0 place-items-center overflow-hidden rounded-full border border-rule bg-[var(--rule)] text-base font-bold text-muted sm:h-28 sm:w-28 sm:text-lg"
         >
           {/* When you add public/headshot.jpg, replace the line below with:
               <img src="/headshot.jpg" alt="Hemanshu Boppana" className="h-full w-full object-cover" /> */}

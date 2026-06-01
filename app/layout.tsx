@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
@@ -12,6 +12,11 @@ export const metadata: Metadata = {
   title: "Hemanshu Boppana",
   description:
     "Hemanshu Boppana — Computer Science & Statistics @ University of Florida.",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 // Runs before paint to set the theme class, preventing a light/dark flash.
