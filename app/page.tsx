@@ -1,6 +1,7 @@
 import ThemeToggle from "./components/ThemeToggle";
 import Stepper from "./components/Stepper";
 import LogoBadge from "./components/LogoBadge";
+import TypewriterName from "./components/TypewriterName";
 
 /* ------------------------------------------------------------------ *
  * Placeholder content. Swap these out for real copy section by section.
@@ -96,17 +97,13 @@ export default function Home() {
     <main id="top" className="mx-auto max-w-2xl px-6 py-16 sm:py-20">
       {/* Header: name + social logos (right of name) + inline nav, photo */}
       <header className="flex items-start justify-between gap-6">
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0">
           {/* Name (clickable -> back to top) with social logos to its right */}
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-            <h1
-              aria-label={fullName}
-              className="typewriter-shell shrink-0 text-xl font-bold tracking-tight sm:text-2xl"
-            >
-              <span aria-hidden="true" className="typewriter-measure">{fullName}</span>
-              <span aria-hidden="true" className="typewriter">{fullName}</span>
+          <div className="flex items-center gap-3">
+            <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
+              <TypewriterName name={fullName} />
             </h1>
-            <span className="ml-auto flex shrink-0 items-center gap-3">
+            <span className="flex items-center gap-3">
               <a
                 href="https://github.com/hboppana"
                 target="_blank"
