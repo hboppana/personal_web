@@ -174,8 +174,20 @@ body {
   }
 }
 
-.typewriter {
+.typewriter-shell {
+  position: relative;
   display: inline-block;
+  white-space: nowrap;
+}
+
+.typewriter-measure {
+  visibility: hidden;
+}
+
+.typewriter {
+  position: absolute;
+  inset: 0;
+  display: block;
   overflow: hidden;
   white-space: nowrap;
   /* Solid caret stays visible while typing */
@@ -185,14 +197,14 @@ body {
     typewriter 1s steps(16, end) 0.4s forwards,
     /* starts after typing finishes (0.4s + 1s), blinks ~3s, then hidden */
       caret-blink-out 0.75s step-end 1.4s 4 forwards;
-  vertical-align: bottom;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .typewriter-measure {
+    visibility: visible;
+  }
   .typewriter {
-    width: auto;
-    border-right: 0;
-    animation: none;
+    display: none;
   }
   .uf-gradient {
     animation: none;

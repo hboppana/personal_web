@@ -96,9 +96,12 @@ export default function Home() {
       <header className="flex items-start justify-between gap-6">
         <div className="min-w-0">
           {/* Name (clickable -> back to top) with social logos to its right */}
-          <div className="flex items-center gap-3">
-            <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
-              <span className="typewriter">Hemanshu Boppana</span>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+            <h1 className="typewriter-shell text-xl font-bold tracking-tight sm:text-2xl">
+              <span className="typewriter-measure">Hemanshu Boppana</span>
+              <span aria-hidden="true" className="typewriter">
+                Hemanshu Boppana
+              </span>
             </h1>
             <a
               href="https://github.com/hboppana"
