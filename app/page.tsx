@@ -163,7 +163,7 @@ export default function Home() {
         {/* Headshot */}
         <div className="h-20 w-20 shrink-0 overflow-hidden rounded-full border border-rule bg-[var(--rule)] sm:h-36 sm:w-36">
           <img
-            src="/headshot.jpg"
+            src="/headshot.png"
             alt="Hemanshu Boppana"
             className="h-full w-full object-cover"
           />
